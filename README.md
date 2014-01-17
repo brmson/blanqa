@@ -21,7 +21,6 @@ Quick instructions for setting up, building and running (focused on Debian Wheez
   * ``apt-get install default-jdk maven uima-utils``
   * ``git clone https://github.com/brmson/uima-ecd && cd uima-ecd && { mvn install; cd ..; }``
   * ``mvn verify``
-  * ``cp data/oaqa-eval-base.db3 data/oaqa-eval.db3``
   * ``mvn exec:exec -Dexec.executable=java -Dexec.args="-Djava.library.path=lib/ -classpath %classpath edu.cmu.lti.oaqa.ecd.driver.ECDDriver phases.blanqa"``
 
 
@@ -30,8 +29,8 @@ Quick instructions for setting up, building and running (focused on Debian Wheez
 BlanQA evolved from the "DSO project" of OAQA, mirroring its architecture
 to a degree, but simplifying and reorganizing its components.
 
-BlanQA depends on the CSE infrastructure of OAQA even though it is currently
-deprecated; we plan to move to its successor "BagPipes" when it's ready.
+BlanQA does not depend on the CSE infrastructure; we may make use of its
+successor "BagPipes" when it's ready if it makes sense.
 
 ### TAKEPIG (TP)
 

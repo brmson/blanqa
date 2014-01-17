@@ -1,42 +1,38 @@
 configuration:
   name: blanqa
   author: brmson
-regex: "\\$[^.]*"
-
-persistence-provider:
-  inherit: phases.db.local-persistence-provider
 
 collection-reader:
   inherit: phases.collection.fixed-question
   qtext: "What prize did Watson receive?"
 
 pipeline:
-  - inherit: jdbc.sqlite.cse.phase
+  - inherit: ecd.phase
     name: answer-type-extractor
     options: |
       - inherit: phases.answertype.fixed
         atype: "NEnumber->NEquantity"
 
-  - inherit: jdbc.sqlite.cse.phase
+  - inherit: ecd.phase
     name: keyterm-extractor
     options: |
       - inherit: phases.keyterm.fixed
         keyterms: "prize|Watson|received"
         keyphrases: "Watson receive"
 
-  - inherit: jdbc.sqlite.cse.phase
+  - inherit: ecd.phase
     name: passage-retrieval
     options: |
       - inherit: phases.passage.fixed
         text: "Watson received the first prize of $1 million."
 
-  - inherit: jdbc.sqlite.cse.phase
+  - inherit: ecd.phase
     name: information-extractor
     options: |
       - inherit: phases.ie.fixedregex
         regex: "\\$[^.]*"
 
-  - inherit: jdbc.sqlite.cse.phase
+  - inherit: ecd.phase
     name: answer-generator
     options: |
       - inherit: phases.answer.basic
