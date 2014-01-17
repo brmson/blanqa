@@ -11,7 +11,7 @@ import org.oaqa.model.SearchResult;
 import org.oaqa.model.Answer;
 
 import cz.brmlab.brmson.takepig.basephase.AbstractInformationExtractor;
-import cz.brmlab.brmson.takepig.framework.data.SupportingEvidence;
+import cz.brmlab.brmson.takepig.framework.data.AnswerSupport;
 
 
 /**
@@ -44,9 +44,9 @@ public class FixedRegexInformationExtractor extends AbstractInformationExtractor
 		}
 	}
 
-	public List<Answer> extractAnswerCandidates(SupportingEvidence ev, List<String> featureLabels) {
+	public List<Answer> extractAnswerCandidates(AnswerSupport as, List<String> featureLabels) {
 		List<Answer> answers = new LinkedList<Answer>();
-		for (SearchResult r : ev.getResults()) {
+		for (SearchResult r : as.getResults()) {
 			Matcher m = regex.matcher(r.getText());
 			while (m.find()) {
 				Answer a = new Answer(this.jcas);

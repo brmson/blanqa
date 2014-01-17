@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.oaqa.model.SearchResult;
 
-public class SupportingEvidence {
+public class AnswerSupport {
 
 	private String questionText;
 	private String answerType;
@@ -14,7 +14,7 @@ public class SupportingEvidence {
 
 	private List<SearchResult> results;
 
-	public SupportingEvidence(String questionText, String answerType,
+	public AnswerSupport(String questionText, String answerType,
 			List<String> keywords, List<String> keyphrases,
 			List<SearchResult> results) {
 		this.questionText = questionText;
