@@ -1,0 +1,4 @@
+class: cz.brmlab.brmson.blanqa.phase.answertype.FixedAnswerTypeExtractor
+
+persistence-provider: |
+  inherit: ecd.default-log-persistence-provider

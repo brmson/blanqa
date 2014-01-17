@@ -1,0 +1,4 @@
+class: cz.brmlab.brmson.blanqa.phase.answer.AnswerGenerator
+
+persistence-provider: |
+  inherit: ecd.default-log-persistence-provider

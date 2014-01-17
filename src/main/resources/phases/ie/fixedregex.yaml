@@ -1,0 +1,4 @@
+class: cz.brmlab.brmson.blanqa.phase.ie.FixedRegexInformationExtractor
+
+persistence-provider: |
+  inherit: ecd.default-log-persistence-provider
