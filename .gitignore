@@ -6,3 +6,6 @@
 *.ear
 /target
 /data
+
+# vim files
+.*.sw?
