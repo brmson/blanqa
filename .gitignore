@@ -1,4 +1,4 @@
-*.class
+output.txt
 
 # Package Files #
 *.jar
