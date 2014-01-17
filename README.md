@@ -21,6 +21,7 @@ Quick instructions for setting up, building and running (focused on Debian Wheez
   * ``apt-get install default-jdk maven uima-utils``
   * ``git clone https://github.com/brmson/uima-ecd && cd uima-ecd && { mvn install; cd ..; }``
   * ``mvn verify``
+  * ``cp data/oaqa-eval-base.db3 data/oaqa-eval.db3``
   * ``mvn exec:exec -Dexec.executable=java -Dexec.args="-Djava.library.path=lib/ -classpath %classpath edu.cmu.lti.oaqa.ecd.driver.ECDDriver phases.blanqa"``
 
 

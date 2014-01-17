@@ -5,7 +5,6 @@ output.txt
 *.war
 *.ear
 /target
-/data
 
 # vim files
 .*.sw?
