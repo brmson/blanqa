@@ -42,7 +42,7 @@ supporting infrastructure (esp. the JCas interface).
 
 The traditional pipeline here is:
   * **A**nswer **T**ype Extractor
-  * **K**eyword Extractor
+  * **Ke**yword Extractor
   * **P**assage Extractor
   * **I**nformation Extractor
   * Answer **G**enerator
