@@ -58,10 +58,12 @@ public abstract class AbstractAnswerGenerator extends AbstractLoggedComponent {
 					ViewManager.getView(jcas, ViewType.ANS),
 					finalAnswers, featureLabels);
 
-			OutputElement outputAnswer = new OutputElement(jcas);
-			outputAnswer.setAnswer(finalAnswers.get(0).getText());
-			outputAnswer.setSequenceId(input.getSequenceId());
-			outputAnswer.addToIndexes();
+			if (finalAnswers.size() > 0) {
+				OutputElement outputAnswer = new OutputElement(jcas);
+				outputAnswer.setAnswer(finalAnswers.get(0).getText());
+				outputAnswer.setSequenceId(input.getSequenceId());
+				outputAnswer.addToIndexes();
+			}
 
 		} catch (Exception e) {
 			throw new AnalysisEngineProcessException(e);
