@@ -45,5 +45,3 @@ pipeline:
     name: answer-generator
     options: |
       - inherit: phases.answer.basic
-
-  - inherit: phases.util.AnnotationPrinter
