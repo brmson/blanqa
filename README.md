@@ -32,6 +32,71 @@ to a degree, but simplifying and reorganizing its components.
 BlanQA does not depend on the CSE infrastructure; we may make use of its
 successor "BagPipes" when it's ready if it makes sense.
 
+### A Brief Walkthrough
+
+BlanQA (Brmson), as an instance of OAQA and akin to DeepQA (IBM Watson),
+processes the given question using a pipeline of components ("annotators"
+or here "phases" in particular), configured in the file:
+
+	src/main/resources/phases/blanqa.yaml
+
+The components work on a common object space (CAS) which they in turn
+fill up with data pertaining the question. The object space is typed,
+with the type system described as part of the **baseqa** project in file
+
+	src/main/resources/edu/cmu/lti/oaqa/OAQATypes.xml
+
+and object instances in CAS called "featuresets".
+
+The individual pipeline phases live in the **phase** package namespace
+and are basically as follows:
+
+  * **answertype** considers the question text and guesses the *type*
+    of the named entity (NE) to be returned as answer (e.g. person,
+    location, ...). Guessed types are stored as featuresets in the CAS.
+  * **keyterm** considers the question text and extracts keywords
+    relevant to the subject matter to search for.  Proposed keywords
+    are stored as featuresets in the CAS.
+  * **passage** searches available data sources for the proposed
+    keywords, producing featuresets with a variety of English text
+    snippets relevant to the subject matter and storing them in the CAS.
+  * **ie** extracts (scored) candidate answers from the found passages.
+    Typically, it splits them to sentences, annotates the sentences and
+    then extracts named entities from them that match the guessed answer
+    types. Scoring may be performed by measuring relevancy of the
+    sentences, distance of named entities from keywords in the sentences,
+    etc. Ideally, intermediate data should be stored in CAS but the reality
+    is not so peachy. At any rate, candidate answers are stored in the CAS.
+  * **answer** sorts all the candidate answers found in CAS and picks
+    the highest scored one.
+
+Of each stage, we may have multiple implementations running in parallel.
+So we can e.g. retrieve passages from Wikipedia, local data and Google,
+all within a single phase, spawning many later-indistinguishable "Passage"
+objects.
+
+Ideally, all our intermediate data should live in CAS, operated on swarms
+of UIMA annotators; for rapid prototyping reasons, this is not always
+the case and in case of more complex phases, we make use of monolithical
+phases that use Java classes to talk to their components; these class
+data carriers live in **framework.data** packages. (Note that OpenQA
+framework.data however contains also some CAS object wrappers.)
+
+We attempt to shield our phases from having to directly manipulate the CAS;
+the **framework.jcas** packages provide an abstraction for access to various
+classes of featuresets in the CAS.
+
+### Package Organization
+
+We live in the cz.brmlab.brmson namespace, trying to reflect the OpenQA
+namespace structure to some degree. **core** pertains to generic OpenQA
+interfaces, in particular "core.provider" as a nice singleton-ish interface
+to external (NLP) libraries. **takepig** pertains to generic QA pipeline
+components, see below. **blanqa** then carries our particular pipeline
+implementation.
+
+All these three namespaces share a similar internal structure.
+
 ### Analysis Classes
 
 In the long run, the classes of "blanqa.analysis" should graduate to
