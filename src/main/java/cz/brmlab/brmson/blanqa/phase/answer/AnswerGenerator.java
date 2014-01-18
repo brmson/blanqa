@@ -45,12 +45,12 @@ public class AnswerGenerator extends AbstractAnswerGenerator {
 			}
 		}
 
-		// sort answer candidates by sum of scores
+		// sort answer candidates by their scores in ascending order
 		// (use original order for tie-breaking)
 		Answer[] sorted = results.values().toArray(new Answer[results.size()]);
 		Arrays.sort(sorted, new Comparator<Answer>(){ @Override
 			public int compare(Answer a1, Answer a2){
-				return - (int) (a1.getScore() - a2.getScore());
+				return Double.valueOf(a2.getScore()).compareTo(Double.valueOf(a1.getScore()));
 			} } );
 		List<Answer> finalAnswers = new ArrayList<Answer>(sorted.length);
 		for (Answer result : sorted) {
@@ -60,8 +60,8 @@ public class AnswerGenerator extends AbstractAnswerGenerator {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < Math.min(5, finalAnswers.size()); i++) {
 			sb.append((i > 0 ? ", " : ""));
-			sb.append("\"" + finalAnswers.get(i) + "\"");
-			sb.append("\"" + finalAnswers.get(i).getScore() + "\"");
+			sb.append("\"" + finalAnswers.get(i).getText() + "\"");
+			sb.append(":" + finalAnswers.get(i).getScore());
 		}
 		log("Final top answers: " + (sb.length() > 0 ? sb : "No answers found."));
 		
