@@ -91,6 +91,22 @@
 			<artifactId>jwnl</artifactId>
 			<version>1.4_rc3</version>
 		</dependency>
+		<dependency> <!-- of ephyra -->
+			<groupId>edu.cmu.minorthird</groupId>
+			<artifactId>minorthird</artifactId>
+			<version>20080611</version>
+		</dependency>
+		<dependency> <!-- of ephyra -->
+			<groupId>eij</groupId>
+			<artifactId>stanford-parser</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>edu.cmu.lti.javelin</groupId>
+			<artifactId>javelin</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

@@ -4,14 +4,16 @@ configuration:
 
 collection-reader:
   inherit: phases.collection.fixed-question
-  qtext: "What prize did Watson receive?"
+  qtext: "When did Watson compete in Jeopardy?"
 
 pipeline:
   - inherit: ecd.phase
     name: answer-type-extractor
     options: |
-      - inherit: phases.answertype.fixed
-        atype: "NEnumber->NEmoney"
+      - inherit: phases.answertype.ephyra
+    # TODO: Multiple answer types support
+    # TODO: Revise the machine learning performed
+    # TODO: Allow clarification in case of low confidence
 
   - inherit: ecd.phase
     name: keyterm-extractor
@@ -34,6 +36,7 @@ pipeline:
     options: |
       - inherit: phases.ie.ne
     # TODO: Ontologies support
+    # TODO: Trivial keyterm-based sentence-dependent scoring
     # TODO: Non-trivial scoring
 
   # TODO: Soft filter + supporting evidence retrieval
