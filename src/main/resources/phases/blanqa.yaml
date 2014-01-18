@@ -18,9 +18,8 @@ pipeline:
   - inherit: ecd.phase
     name: keyterm-extractor
     options: |
-      - inherit: phases.keyterm.fixed
-        keyterms: "prize|Watson|received"
-        keyphrases: "Watson receive"
+      - inherit: phases.keyterm.ephyra
+    # TODO: Keyphrases (bigrams)
 
   - inherit: ecd.phase
     name: passage-retrieval
