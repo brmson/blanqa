@@ -33,6 +33,15 @@ to a degree, but simplifying and reorganizing its components.
 BlanQA does not depend on the CSE infrastructure; we may make use of its
 successor "BagPipes" when it's ready if it makes sense.
 
+### Analysis Classes
+
+In the long run, the classes of "blanqa.analysis" should graduate to
+UIMA annotators that work on various data (input sentence, search results, etc.).
+
+That will improve scalability and reusability.  However, for the sake of rapid
+development, they are simple Java classes for now.  Still, they are aimed at
+maximum reusability across phase users.
+
 ### TAKEPIG (TP)
 
 The "takepig" package family is destined to be a small separate project but
