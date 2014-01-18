@@ -63,6 +63,7 @@ public abstract class AbstractAnswerGenerator extends AbstractLoggedComponent {
 				outputAnswer.setAnswer(finalAnswers.get(0).getText());
 				outputAnswer.setSequenceId(input.getSequenceId());
 				outputAnswer.addToIndexes();
+				log("FINAL ANSWER >>>>> " + outputAnswer.getAnswer());
 			}
 
 		} catch (Exception e) {
