@@ -13,6 +13,7 @@ import org.oaqa.model.Answer;
 
 import cz.brmlab.brmson.blanqa.analysis.SentenceSplitter;
 import cz.brmlab.brmson.blanqa.analysis.NEExtractor;
+import cz.brmlab.brmson.blanqa.analysis.scoring.SentenceSimilarityUnigram;
 import cz.brmlab.brmson.blanqa.framework.data.NamedEntity;
 import cz.brmlab.brmson.blanqa.framework.data.Sentence;
 import cz.brmlab.brmson.core.provider.opennlp.OpenNLPWrapper;
@@ -40,6 +41,7 @@ public class NEInformationExtractor extends AbstractInformationExtractor {
 			// We know we are going to need this...
 			SentenceSplitter.initialize();
 			NEExtractor.initialize();
+			SentenceSimilarityUnigram.initialize();
 		} catch (Exception e) {
 			throw new ResourceInitializationException(e);
 		}
@@ -56,8 +58,9 @@ public class NEInformationExtractor extends AbstractInformationExtractor {
 			List<Sentence> sentences = SentenceSplitter.split(r, r.getText());
 
 			// score sentences based on relevance
+			SentenceSimilarityUnigram similarityUnigram = new SentenceSimilarityUnigram(as);
 			for (Sentence s : sentences)
-				s.setScore(1); // TODO
+				similarityUnigram.assignScore(s);
 
 			// extract scored named entities from sentences
 			ArrayList<LinkedList<NamedEntity>> NEs = NEx.extractFromSentences(sentences);
