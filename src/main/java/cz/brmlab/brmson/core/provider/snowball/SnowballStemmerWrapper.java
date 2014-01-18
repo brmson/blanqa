@@ -15,7 +15,7 @@ public final class SnowballStemmerWrapper extends SnowballStemmer {
 		if (initialized)
 			return;
 
-		SnowballStemmer.create();
+		create();
 
 		initialized = true;
 	}
