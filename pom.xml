@@ -101,6 +101,11 @@
 			<artifactId>stanford-parser</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<dependency> <!-- of ephyra -->
+                        <groupId>org.tartarus.snowball</groupId>
+                        <artifactId>stemmer</artifactId>
+                        <version>20120530</version>
+                </dependency>
 
 		<dependency>
 			<groupId>edu.cmu.lti.javelin</groupId>

@@ -20,7 +20,7 @@ but hey, it's a start!
 Quick instructions for setting up, building and running (focused on Debian Wheezy):
   * ``sudo apt-get install default-jdk maven uima-utils``
   * ``git clone https://github.com/brmson/uima-ecd && cd uima-ecd && { mvn install; cd ..; }``
-  * ``for i in opennlp netagger wordnet questionanalysis stanfordparser; do wget http://pasky.or.cz/dev/brmson/res-$i.zip; unzip res-$i.zip; done``
+  * ``for i in opennlp netagger wordnet questionanalysis stanfordparser indices; do wget http://pasky.or.cz/dev/brmson/res-$i.zip; unzip res-$i.zip; done``
   * ``mvn verify``
   * ``mvn exec:exec -Dexec.executable=java -Dexec.args="-Djava.library.path=lib/ -classpath %classpath edu.cmu.lti.oaqa.ecd.driver.ECDDriver phases.blanqa"``
 
