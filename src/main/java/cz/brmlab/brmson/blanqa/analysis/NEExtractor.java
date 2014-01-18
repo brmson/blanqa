@@ -105,7 +105,10 @@ public class NEExtractor {
 					NamedEntity NE = new NamedEntity(NEtext);
 					NE.setScore(s.getScore());
 					// TODO: Additional context-based NE scoring
-					System.err.println("NEtok " + NEtok + " NE " + NE.getText() + " score " + NE.getScore());
+
+					System.err.println("NEtok " + NEtok + " NE " + NE.getText()
+							+ " score " + NE.getScore()
+							+ " (sencence " + s.getText() + ")");
 
 					if (NEdedup.get(i).contains(NEtext))
 						continue;
