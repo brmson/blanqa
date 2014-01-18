@@ -1,0 +1,4 @@
+class: cz.brmlab.brmson.blanqa.phase.ie.NEInformationExtractor
+
+persistence-provider: |
+  inherit: ecd.default-log-persistence-provider

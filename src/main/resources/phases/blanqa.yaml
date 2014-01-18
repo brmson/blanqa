@@ -11,7 +11,7 @@ pipeline:
     name: answer-type-extractor
     options: |
       - inherit: phases.answertype.fixed
-        atype: "NEnumber->NEquantity"
+        atype: "NEnumber->NEmoney"
 
   - inherit: ecd.phase
     name: keyterm-extractor
@@ -24,13 +24,12 @@ pipeline:
     name: passage-retrieval
     options: |
       - inherit: phases.passage.fixed
-        text: "Watson received the first prize of $1 million."
+        text: "Watson received the first prize of 1,000,000 dollars."
 
   - inherit: ecd.phase
     name: information-extractor
     options: |
-      - inherit: phases.ie.fixedregex
-        regex: "\\$[^.]*"
+      - inherit: phases.ie.ne
 
   - inherit: ecd.phase
     name: answer-generator
