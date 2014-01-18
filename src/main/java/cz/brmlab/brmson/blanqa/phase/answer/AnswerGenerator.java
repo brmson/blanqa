@@ -2,7 +2,7 @@ package cz.brmlab.brmson.blanqa.phase.answer;
 
 import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +48,10 @@ public class AnswerGenerator extends AbstractAnswerGenerator {
 		// sort answer candidates by sum of scores
 		// (use original order for tie-breaking)
 		Answer[] sorted = results.values().toArray(new Answer[results.size()]);
-		Arrays.sort(sorted, Collections.reverseOrder());
+		Arrays.sort(sorted, new Comparator<Answer>(){ @Override
+			public int compare(Answer a1, Answer a2){
+				return - (int) (a1.getScore() - a2.getScore());
+			} } );
 		List<Answer> finalAnswers = new ArrayList<Answer>(sorted.length);
 		for (Answer result : sorted) {
 			finalAnswers.add(result);
