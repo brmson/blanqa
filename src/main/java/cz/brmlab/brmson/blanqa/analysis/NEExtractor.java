@@ -36,6 +36,11 @@ public class NEExtractor {
 			if (thisIds.length > 0)
 				neIds = thisIds;
 		}
+
+		if (neIds == null) {
+			neIds = new int[0];
+			System.err.println("No tagger for NE type " + type + " available");
+		}
 	}
 
 	/**
