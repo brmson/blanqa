@@ -60,6 +60,32 @@
 			<artifactId>uima-ecd</artifactId>
 			<version>2.4.0-SNAPSHOT</version>
 		</dependency>
+
+		<dependency>
+			<groupId>eij</groupId>
+			<artifactId>ephyra</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency> <!-- of ephyra -->
+			<groupId>eij</groupId>
+			<artifactId>opennlp-tool</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency> <!-- of opennlp-tool -->
+			<groupId>eij</groupId>
+			<artifactId>maxent</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency> <!-- of maxent -->
+			<groupId>net.sf.trove4j</groupId>
+			<artifactId>trove4j</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+		<dependency> <!-- of ephyra -->
+			<groupId>eij</groupId>
+			<artifactId>stanford-ner</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

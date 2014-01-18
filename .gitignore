@@ -5,6 +5,7 @@ output.txt
 *.war
 *.ear
 /target
+res-*.zip
 
 # vim files
 .*.sw?
