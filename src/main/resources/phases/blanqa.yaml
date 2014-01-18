@@ -3,8 +3,9 @@ configuration:
   author: brmson
 
 collection-reader:
-  inherit: phases.collection.fixed-question
-  qtext: "When did Watson compete in Jeopardy?"
+  inherit: phases.collection.interactive
+  #inherit: phases.collection.fixed-question
+  #qtext: "When did Watson compete in Jeopardy?"
 
 pipeline:
   - inherit: ecd.phase

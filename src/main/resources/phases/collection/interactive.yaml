@@ -1,0 +1,4 @@
+class: cz.brmlab.brmson.blanqa.framework.collection.InteractiveCollectionReader
+
+persistence-provider: |
+  inherit: ecd.default-experiment-persistence-provider

@@ -10,9 +10,8 @@ are based on the work of the good scientists at CMU (e.g. the helloqa prototype
 branch and the Ephyra project).  Compared to their work, we shift our focus
 from systematic evaluation of experiments to interactive usage.
 
-In its initial version, it can answer English questions about a small corpus
-of English text.  In fact, in the beginning, just a single predefined question,
-but hey, it's a start!
+In its current version, it can interactively answer English questions about
+a small corpus of English text.
 
 
 ## Installation Instructions
