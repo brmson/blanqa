@@ -8,9 +8,12 @@ public class Sentence {
 
 	private SearchResult resultRef;
 
+	private float score;
+
 	public Sentence(SearchResult resultRef, String text) {
 		this.resultRef = resultRef;
 		this.text = text;
+		this.score = 0;
 	}
 
 	public String getText() {
@@ -32,5 +35,15 @@ public class Sentence {
 	}
 	public void setNext(Sentence s) {
 		this.next = s;
+	}
+
+	public float getScore() {
+		return score;
+	}
+	public void setScore(float score) {
+		this.score = score;
+	}
+	public void addScore(float score) {
+		this.score += score;
 	}
 }

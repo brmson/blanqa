@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.oaqa.model.SearchResult;
 
+import cz.brmlab.brmson.blanqa.framework.data.NamedEntity;
 import cz.brmlab.brmson.blanqa.framework.data.Sentence;
 import cz.brmlab.brmson.core.provider.opennlp.OpenNLPWrapper;
 import cz.brmlab.brmson.core.provider.netagger.NETaggerWrapper;
@@ -54,7 +55,7 @@ public class NEExtractor {
 	 * Convert a list of sentences to an array of NE string lists.
 	 *
 	 * This is an end-user wrapper of the other public functions. */
-	public ArrayList<LinkedList<String>> extractFromSentences(List<Sentence> sentences) {
+	public ArrayList<LinkedList<NamedEntity>> extractFromSentences(List<Sentence> sentences) {
 		String[][] tokens = tokenizeSentences(sentences);
 		return extractFromTokenized(sentences, tokens);
 	}
@@ -75,11 +76,11 @@ public class NEExtractor {
 	/**
 	 * Extract NEs (untokenized) from tokenized sentences.
 	 */
-	public ArrayList<LinkedList<String>> extractFromTokenized(List<Sentence> sentences, String[][] tokens) {
-		ArrayList<LinkedList<String>> NEs = new ArrayList<LinkedList<String>>(sentences.size());
+	public ArrayList<LinkedList<NamedEntity>> extractFromTokenized(List<Sentence> sentences, String[][] tokens) {
+		ArrayList<LinkedList<NamedEntity>> NEs = new ArrayList<LinkedList<NamedEntity>>(sentences.size());
 		List<HashSet<String>> NEdedup = new ArrayList<HashSet<String>>(sentences.size());
 		for (int i = 0; i < sentences.size(); i++) {
-			NEs.add(new LinkedList<String>());
+			NEs.add(new LinkedList<NamedEntity>());
 			NEdedup.add(new HashSet<String>());
 		}
 
@@ -91,14 +92,19 @@ public class NEExtractor {
 			for (Sentence s : sentences) {
 				for (int j = 0; j < recognizedNEs[i].length; j++) {
 					String NEtok = recognizedNEs[i][j];
-					String NE = OpenNLPWrapper.untokenize(NEtok, s.getText());
-					NE = NE.trim();
-					System.err.println("NEtok " + NEtok + " NE " + NE + ".");
-					if (NE.length() == 0) // ignore empty NEs
+					String NEtext = OpenNLPWrapper.untokenize(NEtok, s.getText());
+					NEtext = NEtext.trim();
+					if (NEtext.length() == 0) // ignore empty NEs
 						continue;
-					if (NEdedup.get(i).contains(NE))
+
+					NamedEntity NE = new NamedEntity(NEtext);
+					NE.setScore(s.getScore());
+					// TODO: Additional context-based NE scoring
+					System.err.println("NEtok " + NEtok + " NE " + NE.getText() + " score " + NE.getScore());
+
+					if (NEdedup.get(i).contains(NEtext))
 						continue;
-					NEdedup.get(i).add(NE);
+					NEdedup.get(i).add(NEtext);
 					NEs.get(i).add(NE);
 				}
 				i++;

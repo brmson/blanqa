@@ -13,6 +13,7 @@ import org.oaqa.model.Answer;
 
 import cz.brmlab.brmson.blanqa.analysis.SentenceSplitter;
 import cz.brmlab.brmson.blanqa.analysis.NEExtractor;
+import cz.brmlab.brmson.blanqa.framework.data.NamedEntity;
 import cz.brmlab.brmson.blanqa.framework.data.Sentence;
 import cz.brmlab.brmson.core.provider.opennlp.OpenNLPWrapper;
 import cz.brmlab.brmson.core.provider.netagger.NETaggerWrapper;
@@ -48,29 +49,38 @@ public class NEInformationExtractor extends AbstractInformationExtractor {
 		NEExtractor NEx = new NEExtractor();
 		NEx.setNEType(as.getAnswerType());
 
-		HashMap<String,Integer> NEcounts = new HashMap<String,Integer>();
+		HashMap<String,Float> NEscores = new HashMap<String,Float>();
 
 		for (SearchResult r : as.getResults()) {
+			// split result to sentences
 			List<Sentence> sentences = SentenceSplitter.split(r, r.getText());
 
-			ArrayList<LinkedList<String>> NEs = NEx.extractFromSentences(sentences);
+			// score sentences based on relevance
+			for (Sentence s : sentences)
+				s.setScore(1); // TODO
 
-			for (List<String> NEsOfSentence : NEs) {
-				for (String NE : NEsOfSentence) {
-					if (NEcounts.containsKey(NE)) {
-						NEcounts.put(NE, NEcounts.get(NE) + 1);
+			// extract scored named entities from sentences
+			ArrayList<LinkedList<NamedEntity>> NEs = NEx.extractFromSentences(sentences);
+
+			// record named entities in a global scoreboard
+			for (List<NamedEntity> NEsOfSentence : NEs) {
+				for (NamedEntity NE : NEsOfSentence) {
+					if (NEscores.containsKey(NE.getText())) {
+						double score = NEscores.get(NE.getText()).doubleValue();
+						NEscores.put(NE.getText(), new Float(score + NE.getScore()));
 					} else {
-						NEcounts.put(NE, 1);
+						NEscores.put(NE.getText(), new Float(NE.getScore()));
 					}
 				}
 			}
 		}
 
+		// convert the scoreboard to answer candidates
 		List<Answer> answers = new LinkedList<Answer>();
-		for (Map.Entry<String,Integer> e : NEcounts.entrySet()) {
+		for (Map.Entry<String,Float> e : NEscores.entrySet()) {
 			Answer a = new Answer(this.jcas);
 			a.setText(e.getKey());
-			a.setProbability(e.getValue());
+			a.setScore(e.getValue().floatValue());
 			answers.add(a);
 		}
 		return answers;

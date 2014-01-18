@@ -34,9 +34,11 @@ pipeline:
     name: information-extractor
     options: |
       - inherit: phases.ie.ne
-    # TODO: Ontologies support
     # TODO: Trivial keyterm-based sentence-dependent scoring
-    # TODO: Non-trivial scoring
+    # TODO: Make this an internal pipeline - make UIMA types out of NamedEntity + Sentence
+    # TODO: Ontologies support
+    # TODO: Coreferences resolution
+    # TODO: Non-trivial scoring (NE proximity scoring etc.)
 
   # TODO: Soft filter + supporting evidence retrieval
 
