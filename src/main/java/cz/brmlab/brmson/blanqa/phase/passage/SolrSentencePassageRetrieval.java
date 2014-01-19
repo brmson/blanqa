@@ -54,7 +54,6 @@ public class SolrSentencePassageRetrieval extends AbstractPassageRetrieval {
 		if (embedded == null)
 			embedded = (Boolean) false;
 		String serverUrl = (String) aContext.getConfigParameterValue("server");
-		Integer serverPort = (Integer) aContext.getConfigParameterValue("port");
 		String core = (String) aContext.getConfigParameterValue("core");
 		if (embedded != null && embedded == true) {
 			if (core == null)
@@ -62,12 +61,10 @@ public class SolrSentencePassageRetrieval extends AbstractPassageRetrieval {
 		} else {
 			if (serverUrl == null)
 				throw new IllegalArgumentException(String.format("Parameter 'server' must be specified"));
-			if (serverPort == null)
-				throw new IllegalArgumentException(String.format("Parameter 'port' must be specified"));
 		}
 
 		try {
-			this.Solr = new SolrWrapper(serverUrl, serverPort, embedded, core);
+			this.Solr = new SolrWrapper(serverUrl, null, embedded, core);
 		} catch (Exception e) {
 			throw new ResourceInitializationException(e);
 		}
