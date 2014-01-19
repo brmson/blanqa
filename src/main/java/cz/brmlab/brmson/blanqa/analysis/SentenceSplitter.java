@@ -14,6 +14,7 @@ import cz.brmlab.brmson.core.provider.opennlp.OpenNLPWrapper;
 
 public class SentenceSplitter {
 	private static final int MIN_SENTENCE_LENGTH = 3;
+	private static final int MAX_SENTENCE_LENGTH = 512;
 
 	/**
 	 * Split a given result with a given text (may be preprocessed)
@@ -26,6 +27,10 @@ public class SentenceSplitter {
 		for (String text : sentenceTexts) {
 			if (text.length() <= MIN_SENTENCE_LENGTH)
 				continue;
+			if (text.length() > MAX_SENTENCE_LENGTH) {
+				System.err.println("Omitting extremely long sentence: " + text.substring(0, 64) + " ...");
+				continue;
+			}
 			Sentence s = new Sentence(srcResult, text);
 			if (sentences.size() > 0) {
 				s.setPrev(sentences.getLast());
