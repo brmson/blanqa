@@ -46,6 +46,7 @@ public class FixedPassageRetrieval extends AbstractPassageRetrieval {
 		d.setDocId("fixed");
 		d.setUri("fixed");
 		d.setText(text);
+		d.setScore(1);
 		results.add(d);
 
 		return results;

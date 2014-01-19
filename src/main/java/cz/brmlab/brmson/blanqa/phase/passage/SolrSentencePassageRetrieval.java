@@ -126,6 +126,7 @@ public class SolrSentencePassageRetrieval extends AbstractPassageRetrieval {
 					Passage p = new Passage(this.jcas);
 					p.setDocId(id);
 					p.setText(SentenceSplitter.join(sentenceRun));
+					p.setScore(((Float) document.getFieldValue("score")).floatValue());
 					results.add(p);
 					sentenceRun = null;
 				}

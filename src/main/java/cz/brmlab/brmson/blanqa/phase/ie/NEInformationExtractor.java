@@ -66,15 +66,20 @@ public class NEInformationExtractor extends AbstractInformationExtractor {
 			ArrayList<LinkedList<NamedEntity>> NEs = NEx.extractFromSentences(sentences);
 
 			// record named entities in a global scoreboard
+			int i = 0;
 			for (List<NamedEntity> NEsOfSentence : NEs) {
+				Sentence s = sentences.get(i);
+				double Sscore = s.getScore() * (s.getResultRef() != null ? s.getResultRef().getScore() : 1);
 				for (NamedEntity NE : NEsOfSentence) {
+					double NEscore = Sscore * NE.getScore();
 					if (NEscores.containsKey(NE.getText())) {
-						double score = NEscores.get(NE.getText()).doubleValue();
-						NEscores.put(NE.getText(), new Float(score + NE.getScore()));
+						double oldscore = NEscores.get(NE.getText()).doubleValue();
+						NEscores.put(NE.getText(), new Float(oldscore + NEscore));
 					} else {
-						NEscores.put(NE.getText(), new Float(NE.getScore()));
+						NEscores.put(NE.getText(), new Float(NEscore));
 					}
 				}
+				i++;
 			}
 		}
 

@@ -66,6 +66,7 @@ public class TextFilePassageRetrieval extends AbstractPassageRetrieval {
 		d.setDocId(fileName);
 		d.setUri("file://" + fileName);
 		d.setText(text);
+		d.setScore(1);
 		results.add(d);
 
 		return results;
