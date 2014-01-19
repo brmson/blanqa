@@ -16,6 +16,7 @@ by using knowledge stored in Project Gutenberg.
 ## Installation Instructions
 
 Quick instructions for setting up, building and running (focused on Debian Wheezy):
+  * We assume that you cloned BlanQA and are now in the directory that contains this README.
   * ``sudo apt-get install default-jdk maven uima-utils``
   * ``git clone https://github.com/brmson/uima-ecd && cd uima-ecd && { mvn install; cd ..; }``
   * ``for i in opennlp netagger wordnet questionanalysis stanfordparser indices; do wget http://pasky.or.cz/dev/brmson/res-$i.zip; unzip res-$i.zip; done``
