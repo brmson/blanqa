@@ -23,6 +23,13 @@ Quick instructions for setting up, building and running (focused on Debian Wheez
   * ``mvn verify``
   * ``mvn exec:exec -Dexec.executable=java -Dexec.args="-Djava.library.path=lib/ -classpath %classpath edu.cmu.lti.oaqa.ecd.driver.ECDDriver phases.blanqa"``
 
+The performance on the Project Gutenberg corpus is not very good. You can
+try asking questions about a smaller snippet of English text ``data/sample.txt``
+by editing the **passage-retrieval** section of the configuration file
+``src/main/resources/phases/blanqa.yaml`` - simply uncomment the **textfile** section
+and comment out the **solrsentence** section. Don't forget to rerun ``mvn verify``
+after any modifications.
+
 
 ## Design Considerations
 

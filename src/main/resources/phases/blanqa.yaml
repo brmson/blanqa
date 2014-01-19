@@ -25,6 +25,8 @@ pipeline:
   - inherit: ecd.phase
     name: passage-retrieval
     options: |
+      #- inherit: phases.passage.textfile
+      #  file: "data/sample.txt"
       - inherit: phases.passage.solrsentence
         embedded: true
         core: data/guten
