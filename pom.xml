@@ -112,6 +112,12 @@
 			<artifactId>javelin</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>edu.cmu.lti.oaqa.core.provider</groupId>
+			<artifactId>solr-provider</artifactId>
+			<version>1.0.7</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

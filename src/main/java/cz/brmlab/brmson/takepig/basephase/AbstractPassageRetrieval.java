@@ -41,9 +41,11 @@ public abstract class AbstractPassageRetrieval extends AbstractLoggedComponent {
 			// do task
 			List<SearchResult> results
 				= retrieveResults(questionText, answerType, keyterms, keyphrases);
+			/*
 			for (SearchResult r: results) {
 				log("Retrieved: " + r);
 			}
+			*/
 
 			// save output
 			SearchJCasManipulator.storeSearchResults(

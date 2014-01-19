@@ -10,9 +10,8 @@ are based on the work of the good scientists at CMU (e.g. the helloqa prototype
 branch and the Ephyra project).  Compared to their work, we shift our focus
 from systematic evaluation of experiments to interactive usage.
 
-In its current version, it can interactively answer English questions about
-a small corpus of English text.
-
+In its current version, it can interactively answer English questions
+by using knowledge stored in Project Gutenberg.
 
 ## Installation Instructions
 
@@ -20,6 +19,7 @@ Quick instructions for setting up, building and running (focused on Debian Wheez
   * ``sudo apt-get install default-jdk maven uima-utils``
   * ``git clone https://github.com/brmson/uima-ecd && cd uima-ecd && { mvn install; cd ..; }``
   * ``for i in opennlp netagger wordnet questionanalysis stanfordparser indices; do wget http://pasky.or.cz/dev/brmson/res-$i.zip; unzip res-$i.zip; done``
+  * ``wget https://github.com/downloads/oaqa/helloqa/guten.tar.gz; tar -C data -xf guten.tar.gz``
   * ``mvn verify``
   * ``mvn exec:exec -Dexec.executable=java -Dexec.args="-Djava.library.path=lib/ -classpath %classpath edu.cmu.lti.oaqa.ecd.driver.ECDDriver phases.blanqa"``
 
@@ -106,6 +106,22 @@ That will improve scalability and reusability.  However, for the sake of rapid
 development, they are simple Java classes for now.  Still, they are aimed at
 maximum reusability across phase users.
 
+### Passage Retrieval
+
+We began our testing with processing only tiny source datasets where we can
+consider the whole dataset as our input. But when mining large datasets
+(e.g. Project Guttenberg, Wikipedia, book texts etc.), we need to turn
+to some fulltext search solution.
+
+The DSO project, which we have mostly copied, uses Lemur Indra for search
+and indexing. We decided to instead focus on SOLR since it offers way more
+active community (a ready-made recipe for straightforward Wikipedia import,
+etc.) and has a ready-made wrapper for OAQA while the Indra knowledge miner
+seems rather hackish. Plus, setting up Indra is a pain due to JNI hassles.
+
+Of course, we can have multiple passage retrieval engines so porting Indra
+later may be useful.
+
 ### TAKEPIG (TP)
 
 The "takepig" package family is destined to be a small separate project but
@@ -116,7 +132,7 @@ supporting infrastructure (esp. the JCas interface).
 The traditional pipeline here is:
   * **A**nswer **T**ype Extractor
   * **Ke**yword Extractor
-  * **P**assage Extractor
+  * **P**assage Retrieval
   * **I**nformation Extractor
   * Answer **G**enerator
 

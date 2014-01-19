@@ -1,0 +1,6 @@
+class: cz.brmlab.brmson.blanqa.phase.passage.SolrSentencePassageRetrieval
+context-sentences: 1
+hit-list-size: 10
+
+persistence-provider: |
+  inherit: ecd.default-log-persistence-provider

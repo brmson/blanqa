@@ -25,11 +25,14 @@ pipeline:
   - inherit: ecd.phase
     name: passage-retrieval
     options: |
-      - inherit: phases.passage.textfile
-        file: "data/sample.txt"
-    # TODO: Indri-indexed databases
-    # TODO: Project Gutenberg
+      - inherit: phases.passage.solrsentence
+        embedded: true
+        core: data/guten
+    # TODO: Manual selection from the Project Gutenberg (remove CIA factbook - fails sentence splitter)
+    # TODO: Carry over relevance scoring
     # TODO: Wikipedia
+    # TODO: Limit fetched context within solr using the "highlighting" machinery
+    # TODO: Sentence-based passage trimming as a separate step (mainly after sentence splitter becomes an annotator)
 
   - inherit: ecd.phase
     name: information-extractor
