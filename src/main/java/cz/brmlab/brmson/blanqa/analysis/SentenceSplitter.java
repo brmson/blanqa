@@ -37,6 +37,15 @@ public class SentenceSplitter {
 		return sentences;
 	}
 
+	public static String join(List<Sentence> sentences) {
+		StringBuilder sb = new StringBuilder();
+		for (Sentence s : sentences) {
+			sb.append(s.getText());
+			sb.append(". ");
+		}
+		return sb.toString();
+	}
+
 	public static void initialize() throws Exception {
 		OpenNLPWrapper.initialize();
 	}
