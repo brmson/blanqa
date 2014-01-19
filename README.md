@@ -21,7 +21,7 @@ Quick instructions for setting up, building and running (focused on Debian Wheez
   * ``for i in opennlp netagger wordnet questionanalysis stanfordparser indices; do wget http://pasky.or.cz/dev/brmson/res-$i.zip; unzip res-$i.zip; done``
   * ``wget https://github.com/downloads/oaqa/helloqa/guten.tar.gz; tar -C data -xf guten.tar.gz``
   * ``mvn verify``
-  * ``mvn exec:exec -Dexec.executable=java -Dexec.args="-Djava.library.path=lib/ -classpath %classpath edu.cmu.lti.oaqa.ecd.driver.ECDDriver phases.blanqa"``
+  * ``mvn -q exec:java -Dexec.arguments="phases.blanqa"``
 
 The performance on the Project Gutenberg corpus is not very good. You can
 try asking questions about a smaller snippet of English text ``data/sample.txt``
