@@ -31,8 +31,7 @@ pipeline:
         embedded: true
         core: data/guten
     # TODO: Manual selection from the Project Gutenberg (remove CIA factbook - fails sentence splitter)
-    # TODO: Carry over relevance scoring
-    # TODO: Wikipedia
+    # TODO: Wikipedia markup handling
     # TODO: Limit fetched context within solr using the "highlighting" machinery
     # TODO: Sentence-based passage trimming as a separate step (mainly after sentence splitter becomes an annotator)
 
