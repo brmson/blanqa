@@ -93,7 +93,8 @@ public class SolrSentencePassageRetrieval extends AbstractPassageRetrieval {
 
 		for (SolrDocument document : documents) {
 			String id = (String) document.getFieldValue("id");
-			log(" FOUND: " + id);
+			String title = (String) document.getFieldValue("titleText");
+			log(" FOUND: " + id + " " + (title != null ? title : ""));
 			String text;
 			try {
 				text = Solr.getDocText(id);
