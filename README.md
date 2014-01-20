@@ -36,6 +36,38 @@ by editing the **passage-retrieval** section of the configuration file
 and comment out the **solrsentence** section. Don't forget to rerun ``mvn verify``
 after any modifications.
 
+### Wikipedia Data Source
+
+It is not too difficult to use English Wikipedia as a data source, but it is very
+memory and IO intensive process. You will need about 80-100GiB of disk space and
+bandwidth to download 10GiB source file; indexing will require roughly 8GiB RAM.
+
+To index and then search in Wikipedia, we need to set it up as a standalone Solr
+source:
+
+  * Download solr (http://www.apache.org/dyn/closer.cgi/lucene/solr/),
+    unpack and cd to the ``example/`` subdirectory.
+  * Download and unpack http://pasky.or.cz/dev/brmson/solr-enwiki.zip Solr enwiki
+    import configuration.
+  * Download enwiki dump from http://dumps.wikimedia.org/enwiki/ (you want the
+    ``enwiki-*-pages-articles.xml.bz2`` file), store in the ``enwiki/`` subdirectory.
+    (Its size is many gigabytes!)
+  * ``bunzip2 enwiki/enwiki*.bz2`` (This will take about 40-50 GiB of space and you
+    can go get some coffee.)
+  * Fix the enwiki XML file reference in ``enwiki/collection1/conf/data-import.xml``
+  * Start standalone Solr server: ``java -Dsolr.solr.home=enwiki -jar start.jar``
+  * In your web browser, open http://localhost:8983/solr/ - you should see a fancy page.
+  * In your web browser, open http://localhost:8983/solr/dataimport?command=full-import
+    (this will take 1-2 hours on a moderately fast machine and consume another few tens
+    of gigabytes).
+
+Now, we simply need to tell Blanqa to use our standalone Solr source. Add this
+to the passage-retrieval phase:
+
+      - inherit: phases.passage.solrsentence
+        server: http://localhost:8983/solr/
+        core: collection1
+
 
 ## Design Considerations
 
