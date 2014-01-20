@@ -27,9 +27,13 @@ pipeline:
     options: |
       #- inherit: phases.passage.textfile
       #  file: "data/sample.txt"
+      #- inherit: phases.passage.solrsentence
+      #  embedded: true
+      #  core: data/guten
+      # Wikipedia:
       - inherit: phases.passage.solrsentence
-        embedded: true
-        core: data/guten
+        server: http://pasky.or.cz:8983/solr/
+        core: collection1
     # TODO: Manual selection from the Project Gutenberg (remove CIA factbook - fails sentence splitter)
     # TODO: Wikipedia markup handling
     # TODO: Limit fetched context within solr using the "highlighting" machinery
