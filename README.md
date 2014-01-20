@@ -24,8 +24,13 @@ Quick instructions for setting up, building and running (focused on Debian Wheez
   * ``mvn verify``
   * ``mvn -q exec:java -Dexec.arguments="phases.blanqa"``
 
-The performance on the Project Gutenberg corpus is not very good. You can
-try asking questions about a smaller snippet of English text ``data/sample.txt``
+
+## Data Sources
+
+The performance on the (default) Project Gutenberg corpus is actually not that good.
+But try asking e.g. about "Who wrote Hamlet?"
+
+You can try asking questions about a smaller snippet of English text ``data/sample.txt``
 by editing the **passage-retrieval** section of the configuration file
 ``src/main/resources/phases/blanqa.yaml`` - simply uncomment the **textfile** section
 and comment out the **solrsentence** section. Don't forget to rerun ``mvn verify``
