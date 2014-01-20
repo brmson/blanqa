@@ -59,8 +59,13 @@ public abstract class AbstractAnswerGenerator extends AbstractLoggedComponent {
 					finalAnswers, featureLabels);
 
 			if (finalAnswers.size() > 0) {
+				StringBuilder sb = new StringBuilder();
+				for(int i=0;i<Math.min(finalAnswers.size(), 5);i++){
+					sb.append("|"+finalAnswers.get(i).getText());
+				}
 				OutputElement outputAnswer = new OutputElement(jcas);
-				outputAnswer.setAnswer(finalAnswers.get(0).getText());
+				//outputAnswer.setAnswer(finalAnswers.get(0).getText());
+				outputAnswer.setAnswer(sb.toString());
 				outputAnswer.setSequenceId(input.getSequenceId());
 				outputAnswer.addToIndexes();
 				log("FINAL ANSWER >>>>> " + outputAnswer.getAnswer());
