@@ -3,9 +3,11 @@ configuration:
   author: brmson
 
 collection-reader:
-  inherit: phases.collection.interactive
+  #inherit: phases.collection.interactive
   #inherit: phases.collection.fixed-question
   #qtext: "When did Watson compete in Jeopardy?"
+  inherit: phases.collection.pipe
+  askfile: /tmp/brmson.ask
 
 pipeline:
   - inherit: ecd.phase
@@ -56,3 +58,6 @@ pipeline:
       - inherit: phases.answer.basic
 
   - inherit: phases.consumer.interactive
+
+  - inherit: phases.consumer.pipe
+    ansfile: /tmp/brmson.ans
